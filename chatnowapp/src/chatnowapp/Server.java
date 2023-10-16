@@ -4,7 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 public class Server extends JFrame implements ActionListener{
-    public JPanel p1;
+    public JTextField message;
+    public JButton send_button;
+    public JLabel name,status,l3,l4,l5;
+    public JPanel p1,p2;
     public ImageIcon i1,i2,i3,i4,i5;
     
     //image icon for conversion from scaled image to image icon
@@ -48,7 +51,17 @@ public class Server extends JFrame implements ActionListener{
         p1.add(profile);
         
         //profile image ENDS---------------------------------------------------------------------------------------
+        name= new JLabel("Aayush");
+        name.setBounds(100,15,100,18);
+        name.setForeground(Color.WHITE);
+        name.setFont(new Font("SAN SERIF", Font.BOLD,18));
+        p1.add(name);
         
+        status= new JLabel("Active now");
+        status.setBounds(100,34,100,18);
+        status.setForeground(Color.WHITE);
+        status.setFont(new Font("SAN SERIF", Font.BOLD,12));
+        p1.add(status);
         //call image STARTS---------------------------------------------------------------------------------------
         
         i3= new ImageIcon(ClassLoader.getSystemResource("icons/phone.png"));
@@ -83,9 +96,31 @@ public class Server extends JFrame implements ActionListener{
         
         //dot image ENDS---------------------------------------------------------------------------------------
         
-        setTitle("Barta");
+        //next panel
+        p2 = new JPanel();
+//        p2.setBackground(new Color(0, 157, 209));
+        p2.setBounds(5,75,440,570);
+//        p2.setLayout(null);
+        add(p2);
+        
+        //now textfield to write message
+        message = new JTextField();
+        message.setBounds(5,655,310,40);
+        message.setFont(new Font("SAN SERIF", Font.PLAIN, 16));
+        add(message);
+        
+        //now send button
+        send_button = new JButton("Send");
+        send_button.setBounds(320,655,123,40);
+        send_button.setBackground(new Color(126,211,72));
+        send_button.setForeground(new Color(255,255,255));
+        send_button.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
+        add(send_button);
+        
+        
         setSize(450,700);
         setLocation(1000,50);
+        setUndecorated(true);
         getContentPane().setBackground(Color.WHITE);
 //        getContentPane().setBackground(new  Color(151,231,245));
         
