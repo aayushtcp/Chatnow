@@ -6,7 +6,7 @@ import javax.swing.border.*;
 import java.awt.event.*;
 import java.util.*;
 import java.text.*;
-public class Server extends JFrame implements ActionListener{
+public class Client extends JFrame implements ActionListener{
     public JTextField message;
     public JButton send_button;
     public JLabel name,status,l3,l4,l5;
@@ -16,7 +16,7 @@ public class Server extends JFrame implements ActionListener{
     
     //image icon for conversion from scaled image to image icon
     public ImageIcon backScale,sendScale,callScale,videoScale,dotScale,profileScale;
-    Server(){
+    Client(){
         setLayout(null);
         
         p1 = new JPanel();
@@ -46,7 +46,7 @@ public class Server extends JFrame implements ActionListener{
         
         //profile image STARTS---------------------------------------------------------------------------------------
         
-        i2= new ImageIcon(ClassLoader.getSystemResource("icons/1.png"));
+        i2= new ImageIcon(ClassLoader.getSystemResource("icons/2.png"));
         Image scalei2 = i2.getImage().getScaledInstance(50, 50,Image.SCALE_DEFAULT);
         profileScale = new ImageIcon(scalei2);
         
@@ -55,7 +55,7 @@ public class Server extends JFrame implements ActionListener{
         p1.add(profile);
         
         //profile image ENDS---------------------------------------------------------------------------------------
-        name= new JLabel("Aayush");
+        name= new JLabel("Saugat");
         name.setBounds(100,15,100,18);
         name.setForeground(Color.WHITE);
         name.setFont(new Font("SAN SERIF", Font.BOLD,18));
@@ -131,7 +131,7 @@ public class Server extends JFrame implements ActionListener{
         
         
         setSize(450,700);
-        setLocation(1000,50);
+        setLocation(500,50);
         setUndecorated(true);
         getContentPane().setBackground(Color.WHITE);
 //        getContentPane().setBackground(new  Color(151,231,245));
@@ -190,7 +190,6 @@ public class Server extends JFrame implements ActionListener{
     
     
     public static void main(String[] args){
-        Server s = new Server();
+        Client c = new Client();
     }
 }
- 
