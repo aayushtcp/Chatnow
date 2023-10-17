@@ -6,24 +6,28 @@ import javax.swing.border.*;
 import java.awt.event.*;
 import java.util.*;
 import java.text.*;
-public class Server extends JFrame implements ActionListener{
+import java.net.*;
+import java.io.*;
+public class Server  implements ActionListener{
+    static JFrame frame = new JFrame();
     public JTextField message;
     public JButton send_button;
     public JLabel name,status,l3,l4,l5;
     public JPanel p1,p2,right;
     public ImageIcon i1,i2,i3,i4,i5;
-    Box vertical = Box.createVerticalBox();
+    static Box vertical = Box.createVerticalBox();
+    static DataOutputStream doutput;
     
     //image icon for conversion from scaled image to image icon
     public ImageIcon backScale,sendScale,callScale,videoScale,dotScale,profileScale;
     Server(){
-        setLayout(null);
+        frame.setLayout(null);
         
         p1 = new JPanel();
         p1.setBackground(new Color(0, 157, 209));
         p1.setBounds(0,0,450,70);
         p1.setLayout(null);
-        add(p1);
+        frame.add(p1);
         
         //back button or image STARTS---------------------------------------------------------------------------------------
         
@@ -103,13 +107,13 @@ public class Server extends JFrame implements ActionListener{
         //next panel
         p2 = new JPanel();
         p2.setBounds(5,75,440,570);
-        add(p2);
+        frame.add(p2);
         
         //now textfield to write message
         message = new JTextField();
         message.setBounds(5,655,310,40);
         message.setFont(new Font("SAN SERIF", Font.PLAIN, 16));
-        add(message);
+        frame.add(message);
         
         //now send button starts------------------------------------------------------------------------------
         send_button = new JButton("Send"); 
@@ -117,7 +121,7 @@ public class Server extends JFrame implements ActionListener{
         send_button.setBackground(new Color(126,211,72));
         send_button.setForeground(new Color(255,255,255));
         send_button.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
-        add(send_button);
+        frame.add(send_button);
         send_button.addActionListener(this);
         
 //         send_button.addMouseListener(new MouseAdapter(){
@@ -130,37 +134,39 @@ public class Server extends JFrame implements ActionListener{
         //now send button starts------------------------------------------------------------------------------
         
         
-        setSize(450,700);
-        setLocation(1000,50);
-        setUndecorated(true);
-        getContentPane().setBackground(Color.WHITE);
+        frame.setSize(450,700);
+        frame.setLocation(1000,50);
+        frame.setUndecorated(true);
+        frame.getContentPane().setBackground(Color.WHITE);
 //        getContentPane().setBackground(new  Color(151,231,245));
         
-        setVisible(true);
+        frame.setVisible(true);
     }
     
     @Override
     public void actionPerformed(ActionEvent e){
-        String out = message.getText();
-        
-//        JLabel output = new JLabel(out);
-//        JPanel outt = new JPanel();
-        JPanel outt = formatLabel(out);
-        
-//        outt.add(output);
-        p2.setLayout(new BorderLayout());
-        right = new JPanel(new BorderLayout()); 
-        right.add(outt, BorderLayout.LINE_END);
-        vertical.add(right);
-        vertical.add(Box.createVerticalStrut(15));
-        
-        p2.add(vertical, BorderLayout.PAGE_START);
-        
-        
-        message.setText("");
-        repaint();
-        invalidate();
-        validate();
+        try{
+            String out = message.getText();
+
+            JPanel outt = formatLabel(out);
+
+            p2.setLayout(new BorderLayout());
+            right = new JPanel(new BorderLayout()); 
+            right.add(outt, BorderLayout.LINE_END);
+            vertical.add(right);
+            vertical.add(Box.createVerticalStrut(15));
+
+            p2.add(vertical, BorderLayout.PAGE_START);
+
+            doutput.writeUTF(out);
+            message.setText("");
+            frame.repaint();
+            frame.invalidate();
+            frame.validate();
+        }catch(Exception z){
+            z.printStackTrace();
+        }
+
     }
     
     public static JPanel formatLabel(String out){
@@ -190,7 +196,30 @@ public class Server extends JFrame implements ActionListener{
     
     
     public static void main(String[] args){
-        Server s = new Server();
+        Server obj = new Server();
+        
+        try{
+            ServerSocket skt = new ServerSocket(6001);
+            while(true){
+                Socket s = skt.accept();
+                DataInputStream dinput = new DataInputStream(s.getInputStream());
+                doutput = new DataOutputStream(s.getOutputStream());
+                
+                while(true){
+                    String msg = dinput.readUTF();
+                    JPanel panel = formatLabel(msg);
+                    
+                    JPanel left = new JPanel(new BorderLayout());
+                    left.add(panel, BorderLayout.LINE_START);
+                    
+                    vertical.add(left);
+                    frame.validate();
+                }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
  
