@@ -7,8 +7,9 @@ public class Server extends JFrame implements ActionListener{
     public JTextField message;
     public JButton send_button;
     public JLabel name,status,l3,l4,l5;
-    public JPanel p1,p2;
+    public JPanel p1,p2,right;
     public ImageIcon i1,i2,i3,i4,i5;
+    Box vertical = Box.createVerticalBox();
     
     //image icon for conversion from scaled image to image icon
     public ImageIcon backScale,sendScale,callScale,videoScale,dotScale,profileScale;
@@ -98,9 +99,7 @@ public class Server extends JFrame implements ActionListener{
         
         //next panel
         p2 = new JPanel();
-//        p2.setBackground(new Color(0, 157, 209));
         p2.setBounds(5,75,440,570);
-//        p2.setLayout(null);
         add(p2);
         
         //now textfield to write message
@@ -109,13 +108,23 @@ public class Server extends JFrame implements ActionListener{
         message.setFont(new Font("SAN SERIF", Font.PLAIN, 16));
         add(message);
         
-        //now send button
-        send_button = new JButton("Send");
+        //now send button starts------------------------------------------------------------------------------
+        send_button = new JButton("Send"); 
         send_button.setBounds(320,655,123,40);
         send_button.setBackground(new Color(126,211,72));
         send_button.setForeground(new Color(255,255,255));
         send_button.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
         add(send_button);
+        send_button.addActionListener(this);
+        
+//         send_button.addMouseListener(new MouseAdapter(){
+//            @Override
+//            public void mouseClicked(MouseEvent ae){
+//                System.exit(0);
+//            }
+//        });
+                
+        //now send button starts------------------------------------------------------------------------------
         
         
         setSize(450,700);
@@ -129,6 +138,23 @@ public class Server extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e){
+        String out = message.getText();
+        
+        JLabel output = new JLabel(out);
+        JPanel outt = new JPanel();
+        
+        outt.add(output);
+        p2.setLayout(new BorderLayout());
+        right = new JPanel(new BorderLayout()); 
+        right.add(output, BorderLayout.LINE_END);
+        vertical.add(right);
+        vertical.add(Box.createVerticalStrut(15));
+        
+        p2.add(vertical, BorderLayout.PAGE_START);
+        
+        repaint();
+        invalidate();
+        validate();
     }
     
     
@@ -136,3 +162,4 @@ public class Server extends JFrame implements ActionListener{
         Server s = new Server();
     }
 }
+ 
