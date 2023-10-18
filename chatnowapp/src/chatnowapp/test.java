@@ -1,3 +1,4 @@
+
 package chatnowapp;
 
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.util.*;
 import java.text.*;
 import java.net.*;
 import java.io.*;
-public class Server  implements ActionListener{
+public class test  implements ActionListener{
     static JFrame frame = new JFrame();
     public JTextField message;
     public JButton send_button;
@@ -20,7 +21,7 @@ public class Server  implements ActionListener{
     
     //image icon for conversion from scaled image to image icon
     public ImageIcon backScale,sendScale,callScale,videoScale,dotScale,profileScale;
-    Server(){
+    test(){
         frame.setLayout(null);
         
         p1 = new JPanel();
@@ -198,7 +199,7 @@ public class Server  implements ActionListener{
     
     
     public static void main(String[] args){
-        Server obj = new Server();
+        test obj = new test();
         
         try{
             ServerSocket see = new ServerSocket(6001);
