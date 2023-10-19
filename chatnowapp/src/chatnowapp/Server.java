@@ -50,7 +50,7 @@ public class Server  implements ActionListener{
         
         //profile image STARTS---------------------------------------------------------------------------------------
         
-        i2= new ImageIcon(ClassLoader.getSystemResource("icons/1.png"));
+        i2= new ImageIcon(ClassLoader.getSystemResource("icons/aayush.png"));
         Image scalei2 = i2.getImage().getScaledInstance(50, 50,Image.SCALE_DEFAULT);
         profileScale = new ImageIcon(scalei2);
         
