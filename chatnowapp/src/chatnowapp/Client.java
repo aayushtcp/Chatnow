@@ -51,7 +51,7 @@ public class Client implements ActionListener {
         });
 
         // back button or image
-        // ENDS-------------------------------------------------------------------------------------------
+        // ENDS-------------------------------------------------------------------------------------
 
         // profile image
         // STARTS---------------------------------------------------------------------------------------
@@ -138,13 +138,6 @@ public class Client implements ActionListener {
         f.add(send_button);
         send_button.addActionListener(this);
 
-        // send_button.addMouseListener(new MouseAdapter(){
-        // @Override
-        // public void mouseClicked(MouseEvent ae){
-        // System.exit(0);
-        // }
-        // });
-
         // now send button
         // starts------------------------------------------------------------------------------
 
@@ -152,7 +145,6 @@ public class Client implements ActionListener {
         f.setLocation(500, 50);
         f.setUndecorated(true);
         f.getContentPane().setBackground(Color.WHITE);
-        // getContentPane().setBackground(new Color(151,231,245));
 
         f.setVisible(true);
     }
@@ -161,11 +153,8 @@ public class Client implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         try {
             String out = message.getText();
-            // JLabel output = new JLabel(out);
-            // JPanel outt = new JPanel();
             JPanel outt = formatLabel(out);
 
-            // outt.add(output);
             p2.setLayout(new BorderLayout());
             right = new JPanel(new BorderLayout());
             right.add(outt, BorderLayout.LINE_END);
